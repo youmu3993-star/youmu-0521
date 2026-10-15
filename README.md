@@ -165,9 +165,11 @@ docker compose logs migrate web
 
 **Render 公网试点**：仓库根目录的 `render.yaml` 定义一个 Docker 网页服务，部署时在 Render 控制台安全填写 `DATABASE_URL`。可以连接 Neon PostgreSQL 或付费 Render PostgreSQL；请使用带 TLS 的直连地址，勿把连接串写进 Git。容器启动时先执行 Prisma 迁移与幂等种子，再运行 Next.js；`/api/health` 只有在数据库连通时才返回成功。Render 的 `RENDER_EXTERNAL_URL` 可自动用于默认站点的写请求来源校验；绑定自定义域名后，另设 `APP_ORIGIN=https://你的域名`。没有 OpenAI 密钥时继续明确显示规则演示评分。
 
+**Vercel + Neon 免费试点**：从 GitHub 导入本仓库，使用 Next.js 框架，根目录保持仓库根目录。将 Neon 直连 PostgreSQL 地址仅保存为 Vercel 的私密 `DATABASE_URL` 环境变量，另设 `DEMO_MODE=false`；不设置 `OPENAI_API_KEY` 时仍会明确显示规则演示评分。`vercel.json` 在每次构建前运行 Prisma 迁移和幂等种子，然后执行类型检查与生产构建。生产域名变更后，请在 Vercel 环境变量中设置 `APP_ORIGIN=https://实际访问域名` 并重新部署；预览部署可先依请求 Host 校验。Vercel 函数为按需运行，首次访问可能需要冷启动；数据库始终由 Neon 保存。不要把连接串写进 GitHub。
+
 Render 免费网页服务会在空闲后休眠；**Render 免费 PostgreSQL 会在 30 天后失效，不能作为长期学生档案库**。因此 `render.yaml` 不自动创建数据库，也不授权任何付费资源。要长期保留记录，可接 Neon 等托管 PostgreSQL 并定期异地备份，或在确认费用后使用 Render 付费数据库的时间点恢复；无论哪一种，都不能把恢复窗口当作永久备份。部署前还须核对七条原题的公开转载授权。
 
 备份管理员可在安装了相应版本 PostgreSQL 客户端的受控电脑上，将数据库连接串放入当前进程的 `DATABASE_URL`，运行 `scripts/backup-postgres.ps1 -OutputDirectory <加密存储目录>`。脚本生成自定义格式归档并用 `pg_restore --list` 校验可读性，不把数据库密码作为命令行参数，也不会自动删除旧档。备份文件含学生邮箱和答题记录，应存放在加密、受限且与生产数据库分离的位置；定期在独立测试库演练恢复。仓库默认忽略 `backups/`，不要把归档提交到 GitHub。
 
-未配置实际云账户、正式数据库、OpenAI 密钥和真题授权，所以此次交付为本地可运行项目，未冒称已经部署到公网或完成授权真题接入。接入密钥后还需用教师审核样本检验真实语义评分表现。
+公网部署须以线上健康检查和账号流程的实际验证结果为准；未配置 OpenAI 密钥时是规则演示评分，真题授权状态仍须逐条核对。接入模型密钥后还需用教师审核样本检验真实语义评分表现。
 
