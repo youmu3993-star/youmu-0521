@@ -192,3 +192,106 @@ input:focus,textarea:focus,select:focus{outline-color:#9d8bd1}
 .review-cue-row span{display:block;color:#51465d;font-size:13px;line-height:1.65;margin:4px 0}.review-cue-row small{color:#80758a;font-size:11px}
 .review-cue-row button{white-space:nowrap;font-size:12px;color:#6045ad}
 @media(max-width:600px){.review-cue-row{display:block}.review-cue-row button{margin-top:8px}}
+
+/* 真题档案手机端：把年份、标题、题干和入口改成完整宽度的信息流。 */
+@media(max-width:650px){
+  .filters{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin:22px 0 18px;
+  }
+  .filters label{
+    grid-column:1/-1;
+    min-width:0;
+    min-height:50px;
+    padding:0 13px;
+  }
+  .filters input{
+    min-width:0;
+    font-size:15px;
+    padding:12px 0;
+  }
+  .filters select{
+    width:100%;
+    min-width:0;
+    max-width:none;
+    min-height:48px;
+    padding:10px 34px 10px 12px;
+    font-size:14px;
+  }
+  .filters select:last-child{grid-column:1/-1}
+
+  .frequency-board{
+    padding:18px;
+    margin:12px 0 26px;
+  }
+  .frequency-board strong{font-size:16px;line-height:1.55}
+  .frequency-board p{font-size:14px;line-height:1.85;margin-top:9px}
+  .frequency-board span{font-size:13px;line-height:1.55;padding:7px 10px}
+  .exam-count{font-size:14px;align-items:baseline;margin:20px 0 14px}
+  .exam-count small{font-size:12px;text-align:right}
+
+  .exam-list{border-radius:12px;overflow:hidden}
+  .exam-row{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:0;
+    padding:20px 18px 18px;
+  }
+  .exam-year{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+    margin:0 0 10px;
+    font-size:27px;
+    line-height:1.2;
+  }
+  .exam-year small{
+    display:inline-flex;
+    align-items:center;
+    min-height:26px;
+    margin:0;
+    padding:4px 8px;
+    border-radius:5px;
+    background:#f0ebfa;
+    color:#5b429f;
+    font-size:12px;
+    line-height:1.3;
+  }
+  .exam-info{width:100%;min-width:0}
+  .exam-info h3{
+    margin:0 0 8px;
+    font-size:20px;
+    line-height:1.5;
+    word-break:normal;
+    overflow-wrap:anywhere;
+  }
+  .exam-info p{
+    margin-bottom:12px;
+    font-size:13px;
+    line-height:1.75;
+  }
+  .exam-preview{
+    width:100%;
+    max-width:100%;
+    max-height:280px;
+    margin:14px 0;
+    padding:15px 16px;
+    overflow-x:hidden;
+    font-size:15px;
+    line-height:2;
+  }
+  .status-tags{gap:7px;margin:11px 0}
+  .status-tags span{font-size:12px;padding:5px 8px}
+  .exam-links{font-size:12px;line-height:1.8}
+  .exam-links button{font-size:12px;padding:4px 7px}
+  .exam-row>.secondary-button{
+    width:100%;
+    min-height:46px;
+    margin:18px 0 0;
+    padding:11px 14px;
+    font-size:14px;
+  }
+}
